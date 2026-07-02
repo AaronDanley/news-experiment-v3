@@ -2,17 +2,7 @@
 
 Requirements: Node.js (no npm packages needed — everything uses built-ins).
 
-## 1. CNN news viewer (`server.js`)
-
-Fetches CNN's Google News sitemap and serves the headlines as a barebones web page.
-
-```
-node server.js
-```
-
-Then open `http://localhost:3000` in a browser.
-
-## 2. Batch sitemap checker (`check_sitemaps.js`)
+## 1. Batch sitemap checker (`check_sitemaps.js`)
 
 Checks ~67 publishers for a working, scrapable Google News sitemap (via
 `robots.txt` first, then common guessed paths) and writes the results to
@@ -28,7 +18,7 @@ scratch — any manual edits to that file will be overwritten.
 To add or remove a publisher, edit the `SITES` array near the top of
 `check_sitemaps.js` (format: `[category, name, host]`).
 
-## 3. PLANNED: Headline aggregator + Groq dedupe/ranking pipeline
+## 2. PLANNED: Headline aggregator + Groq dedupe/ranking pipeline
 
 > **Status: plan only — nothing below has been built yet.** This section is the
 > agreed design for the next phase. Do not build or run any of it until told
@@ -144,10 +134,9 @@ instant and free of rate limits.
 
 ### Step 4 — `view_headlines.js` (the spot-check page)
 
-A tiny local HTTP server (same pattern as `server.js`) that reads
-`data/headlines.json` fresh on every page load — no separate "build the
-HTML" step needed, so the page always reflects the latest fetch without
-extra plumbing.
+A tiny local HTTP server that reads `data/headlines.json` fresh on every
+page load — no separate "build the HTML" step needed, so the page always
+reflects the latest fetch without extra plumbing.
 
 Layout, grouped under the 7 category headings, one row per headline:
 
