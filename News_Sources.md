@@ -2,7 +2,7 @@
 
 Generated 2026-07-02. Method: replicate the CNN news-sitemap crawler on each publisher — locate a Google News sitemap (via `robots.txt` or common paths), fetch it, and extract article links and headlines. A site counts as **successful** only if a *news* sitemap returns article links; a generic content sitemap does not count.
 
-**48 of 67** sites had a working, scrapable news sitemap.
+**54 of 79** sites had a working, scrapable news sitemap.
 
 > Note: "Headlines" = the sitemap exposes `<news:title>` (headline + link, exactly like CNN). "Links only" = a news sitemap was found but without embedded titles (you'd get article URLs but would need to fetch each page for the headline).
 
@@ -14,21 +14,13 @@ Generated 2026-07-02. Method: replicate the CNN news-sitemap crawler on each pub
 - **Reuters** — `https://www.reuters.com/arc/outboundfeeds/news-sitemap/?outputType=xml` — 50 articles (headlines + links)
 - **Bloomberg** — `https://www.bloomberg.com/sitemaps/news/latest.xml` — 585 articles (headlines + links)
 
-### International & National Broadcasters
+### International
 
 - **BBC News** — `https://www.bbc.com/sitemaps/https-sitemap-com-news-1.xml` — 1000 articles (headlines + links)
-- **PBS News** — `https://www.pbs.org/newshour/sitemaps/news` — 63 articles (headlines + links)
-- **NPR** — `https://googlecrawl.npr.org/news/sitemap_news.xml` — 177 articles (headlines + links)
 - **Deutsche Welle (DW)** — `https://www.dw.com/en/news-sitemap.xml` — 45 articles (headlines + links)
 - **Al Jazeera** — `https://www.aljazeera.com/news-sitemap.xml` — 196 articles (headlines + links)
 - **France 24** — `https://www.france24.com/sitemaps/en/news.xml` — 207 articles (headlines + links)
 - **ABC News (Australia)** — `https://www.abc.net.au/sitemaps/sitemap-news-0.xml.gz` — 50000 articles (links only) — ⚠️ large archival dump (50k cap, not a rolling 48h news feed like most others)
-
-### Major Newspapers & Digital Publishers (Global)
-
-- **The New York Times** — `https://www.nytimes.com/sitemaps/new/news.xml.gz` — 856 articles (headlines + links)
-- **The Washington Post** — `https://www.washingtonpost.com/sitemaps/news-sitemap.xml.gz` — 164 articles (headlines + links)
-- **The Wall Street Journal** — `https://www.wsj.com/wsjsitemaps/wsj_google_news.xml` — 368 articles (headlines + links)
 - **The Guardian** — `http://www.theguardian.com/sitemaps/news.xml` — 568 articles (headlines + links)
 - **Financial Times** — `https://www.ft.com/sitemaps/news.xml` — 231 articles (headlines + links)
 - **Le Monde (English)** — `https://www.lemonde.fr/en/sitemap_news.xml` — 60 articles (headlines + links)
@@ -37,9 +29,15 @@ Generated 2026-07-02. Method: replicate the CNN news-sitemap crawler on each pub
 - **The Straits Times** — `https://www.straitstimes.com/googlenews.xml` — 807 articles (headlines + links)
 - **Haaretz** — `https://www.haaretz.com/news-sitemap-content.xml` — 72 articles (headlines + links)
 - **The Hindu** — `https://www.thehindu.com/sitemap/googlenews/all/all.xml` — 1000 articles (headlines + links)
+- **The Independent** — `https://www.independent.co.uk/sitemaps/googlenews` — 500 articles (headlines + links)
 
-### National Focused News (US)
+### U.S.
 
+- **The New York Times** — `https://www.nytimes.com/sitemaps/new/news.xml.gz` — 856 articles (headlines + links)
+- **The Washington Post** — `https://www.washingtonpost.com/sitemaps/news-sitemap.xml.gz` — 164 articles (headlines + links)
+- **The Wall Street Journal** — `https://www.wsj.com/wsjsitemaps/wsj_google_news.xml` — 368 articles (headlines + links)
+- **PBS News** — `https://www.pbs.org/newshour/sitemaps/news` — 63 articles (headlines + links)
+- **NPR** — `https://googlecrawl.npr.org/news/sitemap_news.xml` — 177 articles (headlines + links)
 - **CBS News** — `https://www.cbsnews.com/xml-sitemap/news.xml` — 605 articles (headlines + links)
 - **NBC News** — `https://www.nbcnews.com/sitemap/nbcnews/sitemap-news` — 152 articles (headlines + links)
 - **ABC News** — `https://abcnews.com/xmlLatestStories` — 1000 articles (headlines + links)
@@ -48,10 +46,6 @@ Generated 2026-07-02. Method: replicate the CNN news-sitemap crawler on each pub
 - **New Yorker** — `https://www.newyorker.com/feed/google-news-sitemap-feed/sitemap-google-news` — 25 articles (headlines + links)
 - **Vox** — `https://www.vox.com/sitemaps/google_news` — 16 articles (headlines + links)
 - **Axios** — `https://www.axios.com/sitemaps/news.xml` — 299 articles (headlines + links)
-
-### National Focused News (International)
-
-- **The Independent** — `https://www.independent.co.uk/sitemaps/googlenews` — 500 articles (headlines + links)
 
 ### Financial & Business Journalism
 
@@ -74,6 +68,12 @@ Generated 2026-07-02. Method: replicate the CNN news-sitemap crawler on each pub
 - **The Verge** — `https://theverge.com/sitemaps/google_news` — 39 articles (headlines + links)
 - **WIRED** — `https://www.wired.com/feed/google-latest-news/sitemap-google-news` — 30 articles (headlines + links)
 - **TechCrunch** — `https://techcrunch.com/news-sitemap.xml` — 35 articles (headlines + links)
+- **Gizmodo** — `https://gizmodo.com/sitemap-news.xml` — 118 articles (headlines + links)
+- **Android Authority** — `https://www.androidauthority.com/news-sitemap.xml` — 84 articles (headlines + links)
+- **9to5Mac** — `https://9to5mac.com/news-sitemap.xml` — 54 articles (headlines + links)
+- **Engadget** — `https://www.engadget.com/?getfeed=google` — 34 articles (headlines + links)
+- **Tom's Hardware** — `https://www.tomshardware.com/sitemap-news.xml` — 29 articles (headlines + links)
+- **MIT Technology Review** — `https://www.technologyreview.com/news-sitemap.xml` — 7 articles (headlines + links)
 
 ### Health
 
@@ -108,5 +108,11 @@ Sites where no working news sitemap was found (blocked by bot protection, no new
 - **Inside Climate News** (insideclimatenews.org) — blocked (401/403)
 - **Grist** (grist.org) — no news sitemap (only generic/other sitemaps)
 - **Ars Technica** (arstechnica.com) — no news sitemap (only generic/other sitemaps)
+- **VentureBeat** (venturebeat.com) — no news sitemap found (404)
+- **The Register** (theregister.com) — no news sitemap (only generic/other sitemaps)
+- **CNET** (cnet.com) — sitemap works but content is deals/how-to/lifestyle listicles, not news stories
+- **PCMag** (pcmag.com) — sitemap works but content is deals/buying-guide listicles, not news stories
+- **ZDNET** (zdnet.com) — sitemap works but content is review/personal-essay listicles ("I tested...", "I found..."), not news stories
+- **Digital Trends** (digitaltrends.com) — sitemap now blocked (403, CloudFront)
 - **ESPN** (espn.com) — no news sitemap (not-xml, not-xml, not-xml)
 
