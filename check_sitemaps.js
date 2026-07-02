@@ -65,10 +65,8 @@ const SITES = [
 
   ["Major Newspapers & Digital Publishers (Global)", "The New York Times", "nytimes.com"],
   ["Major Newspapers & Digital Publishers (Global)", "The Washington Post", "washingtonpost.com"],
-  ["Major Newspapers & Digital Publishers (Global)", "The Wall Street Journal", "wsj.com"],
   ["Major Newspapers & Digital Publishers (Global)", "The Guardian", "theguardian.com"],
   ["Major Newspapers & Digital Publishers (Global)", "The Economist", "economist.com"],
-  ["Major Newspapers & Digital Publishers (Global)", "Financial Times", "ft.com"],
   ["Major Newspapers & Digital Publishers (Global)", "The Times", "thetimes.com"],
   ["Major Newspapers & Digital Publishers (Global)", "Le Monde (English)", "lemonde.fr"],
   ["Major Newspapers & Digital Publishers (Global)", "The Globe and Mail", "theglobeandmail.com"],
@@ -95,7 +93,6 @@ const SITES = [
 
   ["Financial & Business Journalism", "CNBC", "cnbc.com"],
   ["Financial & Business Journalism", "MarketWatch", "marketwatch.com"],
-  ["Financial & Business Journalism", "Barron’s", "barrons.com"],
   ["Financial & Business Journalism", "Investopedia", "investopedia.com"],
   ["Financial & Business Journalism", "Nikkei Asia", "asia.nikkei.com"],
   ["Financial & Business Journalism", "Harvard Business Review", "hbr.org"],

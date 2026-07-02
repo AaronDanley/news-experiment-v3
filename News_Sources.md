@@ -2,7 +2,7 @@
 
 Generated 2026-07-02. Method: replicate the CNN news-sitemap crawler on each publisher — locate a Google News sitemap (via `robots.txt` or common paths), fetch it, and extract article links and headlines. A site counts as **successful** only if a *news* sitemap returns article links; a generic content sitemap does not count.
 
-**54 of 79** sites had a working, scrapable news sitemap.
+**51 of 79** sites had a working, scrapable news sitemap.
 
 > Note: "Headlines" = the sitemap exposes `<news:title>` (headline + link, exactly like CNN). "Links only" = a news sitemap was found but without embedded titles (you'd get article URLs but would need to fetch each page for the headline).
 
@@ -22,7 +22,6 @@ Generated 2026-07-02. Method: replicate the CNN news-sitemap crawler on each pub
 - **France 24** — `https://www.france24.com/sitemaps/en/news.xml` — 207 articles (headlines + links)
 - **ABC News (Australia)** — `https://www.abc.net.au/sitemaps/sitemap-news-0.xml.gz` — 50000 articles (links only) — ⚠️ large archival dump (50k cap, not a rolling 48h news feed like most others)
 - **The Guardian** — `http://www.theguardian.com/sitemaps/news.xml` — 568 articles (headlines + links)
-- **Financial Times** — `https://www.ft.com/sitemaps/news.xml` — 231 articles (headlines + links)
 - **Le Monde (English)** — `https://www.lemonde.fr/en/sitemap_news.xml` — 60 articles (headlines + links)
 - **The Globe and Mail** — `https://www.theglobeandmail.com/arc/outboundfeeds/news-sitemap/?outputType=xml` — 100 articles (headlines + links)
 - **The Sydney Morning Herald** — `https://www.smh.com.au/sitemaps/news/brands/smh` — 217 articles (headlines + links)
@@ -35,7 +34,6 @@ Generated 2026-07-02. Method: replicate the CNN news-sitemap crawler on each pub
 
 - **The New York Times** — `https://www.nytimes.com/sitemaps/new/news.xml.gz` — 856 articles (headlines + links)
 - **The Washington Post** — `https://www.washingtonpost.com/sitemaps/news-sitemap.xml.gz` — 164 articles (headlines + links)
-- **The Wall Street Journal** — `https://www.wsj.com/wsjsitemaps/wsj_google_news.xml` — 368 articles (headlines + links)
 - **PBS News** — `https://www.pbs.org/newshour/sitemaps/news` — 63 articles (headlines + links)
 - **NPR** — `https://googlecrawl.npr.org/news/sitemap_news.xml` — 177 articles (headlines + links)
 - **CBS News** — `https://www.cbsnews.com/xml-sitemap/news.xml` — 605 articles (headlines + links)
@@ -51,7 +49,6 @@ Generated 2026-07-02. Method: replicate the CNN news-sitemap crawler on each pub
 
 - **CNBC** — `https://www.cnbc.com/sitemap_news.xml` — 158 articles (headlines + links)
 - **MarketWatch** — `https://www.marketwatch.com/mw_news_sitemap_1.xml` — 1000 articles (headlines + links)
-- **Barron’s** — `https://www.barrons.com/bol_news_sitemap.xml` — 150 articles (headlines + links)
 - **Investopedia** — `https://www.investopedia.com/google-news-sitemap.xml` — 47 articles (headlines + links)
 - **Nikkei Asia** — `https://asia.nikkei.com/news_sitemap.xml?date=20260701` — 32 articles (headlines + links)
 - **Fortune** — `https://fortune.com/feed/googlenews/articles.xml` — 86 articles (headlines + links)
@@ -114,5 +111,8 @@ Sites where no working news sitemap was found (blocked by bot protection, no new
 - **PCMag** (pcmag.com) — sitemap works but content is deals/buying-guide listicles, not news stories
 - **ZDNET** (zdnet.com) — sitemap works but content is review/personal-essay listicles ("I tested...", "I found..."), not news stories
 - **Digital Trends** (digitaltrends.com) — sitemap now blocked (403, CloudFront)
+- **The Wall Street Journal** (wsj.com) — hard paywall (nearly all articles subscriber-only)
+- **Financial Times** (ft.com) — hard paywall (nearly all articles subscriber-only)
+- **Barron's** (barrons.com) — hard paywall (nearly all articles subscriber-only)
 - **ESPN** (espn.com) — no news sitemap (not-xml, not-xml, not-xml)
 

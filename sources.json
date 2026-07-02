@@ -9,7 +9,6 @@
   { "name": "France 24", "url": "https://www.france24.com/sitemaps/en/news.xml", "region": "World", "section": "International" },
   { "name": "ABC News (Australia)", "url": "https://www.abc.net.au/sitemaps/sitemap-news-0.xml.gz", "region": "World", "section": "International" },
   { "name": "The Guardian", "url": "http://www.theguardian.com/sitemaps/news.xml", "region": "World", "section": "International" },
-  { "name": "Financial Times", "url": "https://www.ft.com/sitemaps/news.xml", "region": "World", "section": "International" },
   { "name": "Le Monde (English)", "url": "https://www.lemonde.fr/en/sitemap_news.xml", "region": "World", "section": "International" },
   { "name": "The Globe and Mail", "url": "https://www.theglobeandmail.com/arc/outboundfeeds/news-sitemap/?outputType=xml", "region": "World", "section": "International" },
   { "name": "The Sydney Morning Herald", "url": "https://www.smh.com.au/sitemaps/news/brands/smh", "region": "World", "section": "International" },
@@ -20,7 +19,6 @@
 
   { "name": "The New York Times", "url": "https://www.nytimes.com/sitemaps/new/news.xml.gz", "region": "U.S.", "section": "U.S." },
   { "name": "The Washington Post", "url": "https://www.washingtonpost.com/sitemaps/news-sitemap.xml.gz", "region": "U.S.", "section": "U.S." },
-  { "name": "The Wall Street Journal", "url": "https://www.wsj.com/wsjsitemaps/wsj_google_news.xml", "region": "U.S.", "section": "U.S." },
   { "name": "PBS News", "url": "https://www.pbs.org/newshour/sitemaps/news", "region": "U.S.", "section": "U.S." },
   { "name": "NPR", "url": "https://googlecrawl.npr.org/news/sitemap_news.xml", "region": "U.S.", "section": "U.S." },
   { "name": "CBS News", "url": "https://www.cbsnews.com/xml-sitemap/news.xml", "region": "U.S.", "section": "U.S." },
@@ -34,7 +32,6 @@
 
   { "name": "CNBC", "url": "https://www.cnbc.com/sitemap_news.xml", "region": "U.S.", "section": "Financial & Business Journalism" },
   { "name": "MarketWatch", "url": "https://www.marketwatch.com/mw_news_sitemap_1.xml", "region": "U.S.", "section": "Financial & Business Journalism" },
-  { "name": "Barron's", "url": "https://www.barrons.com/bol_news_sitemap.xml", "region": "U.S.", "section": "Financial & Business Journalism" },
   { "name": "Investopedia", "url": "https://www.investopedia.com/google-news-sitemap.xml", "region": "U.S.", "section": "Financial & Business Journalism" },
   { "name": "Nikkei Asia", "url": "https://asia.nikkei.com/news_sitemap.xml?date={YYYYMMDD}", "region": "World", "section": "Financial & Business Journalism" },
   { "name": "Fortune", "url": "https://fortune.com/feed/googlenews/articles.xml", "region": "U.S.", "section": "Financial & Business Journalism" },
