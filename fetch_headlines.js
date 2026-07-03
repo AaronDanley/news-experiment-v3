@@ -204,6 +204,11 @@ const KEYWORD_TERMS = {
     "movie", "film", "album", "actor", "actress", "box office", "celebrity",
     "tv series", "television", "music", "hollywood", "streaming", "concert",
     "grammy", "oscar",
+    // Culture/celebrity terms so entertainment stories aren't left keyword-less
+    // and defaulted into Politics (e.g. a celebrity wedding).
+    "wedding", "singer", "rapper", "pop star", "red carpet", "broadway",
+    "premiere", "netflix", "disney", "emmy", "comedian", "taylor swift",
+    "beyonce",
   ],
   Sports: [
     "match", "championship", "coach", "tournament", "league", "score",
