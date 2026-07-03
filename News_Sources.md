@@ -2,7 +2,7 @@
 
 Generated 2026-07-02. Method: replicate the CNN news-sitemap crawler on each publisher — locate a Google News sitemap (via `robots.txt` or common paths), fetch it, and extract article links and headlines. A site counts as **successful** only if a *news* sitemap returns article links; a generic content sitemap does not count.
 
-**51 of 79** sites had a working, scrapable news sitemap.
+**52 of 80** sites had a working, scrapable news sitemap.
 
 > Note: "Headlines" = the sitemap exposes `<news:title>` (headline + link, exactly like CNN). "Links only" = a news sitemap was found but without embedded titles (you'd get article URLs but would need to fetch each page for the headline).
 
@@ -32,6 +32,7 @@ Generated 2026-07-02. Method: replicate the CNN news-sitemap crawler on each pub
 
 ### U.S.
 
+- **CNN** — `https://www.cnn.com/sitemap/news.xml` — 283 articles (headlines + links)
 - **The New York Times** — `https://www.nytimes.com/sitemaps/new/news.xml.gz` — 856 articles (headlines + links)
 - **The Washington Post** — `https://www.washingtonpost.com/sitemaps/news-sitemap.xml.gz` — 164 articles (headlines + links)
 - **PBS News** — `https://www.pbs.org/newshour/sitemaps/news` — 63 articles (headlines + links)

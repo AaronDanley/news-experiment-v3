@@ -177,11 +177,12 @@ const SECTION_PRIOR = {
 };
 
 // Cheap, approximate keyword classifier — good enough for a first-pass spot
-// check; Groq cleans up real grouping/ranking later. Order matters only in
-// that the first matching category wins. Single words get automatic
-// singular/plural matching (word-boundary regex); phrases with a space are
-// matched as-is. This avoids naive substring bugs (e.g. "app" incorrectly
-// matching inside "happy", or "who" matching almost every headline).
+// check; Groq cleans up real grouping/ranking later. The category with the
+// MOST keyword hits wins (see categorize); ties fall back to the order below.
+// Single words get automatic singular/plural matching (word-boundary regex);
+// phrases with a space are matched as-is. This avoids naive substring bugs
+// (e.g. "app" incorrectly matching inside "happy", or "who" matching almost
+// every headline).
 const KEYWORD_TERMS = {
   Health: [
     "vaccine", "hospital", "fda", "outbreak", "disease", "virus", "diet",
@@ -216,6 +217,15 @@ const KEYWORD_TERMS = {
     "election", "president", "senate", "congress", "minister", "parliament",
     "war", "policy", "vote", "government", "white house", "kremlin",
     "prime minister", "lawmaker",
+    // Prominent, relatively stable hard-news actors/terms so political
+    // headlines are recognized on their own merits instead of defaulting or
+    // being hijacked by a single stray keyword (e.g. a "World Cup" mention in
+    // a multi-story roundup). Keyword-count classification (below) means these
+    // add signal without over-claiming borderline cases.
+    "trump", "biden", "putin", "zelensky", "netanyahu", "russia", "russian",
+    "ukraine", "kyiv", "moscow", "gaza", "israel", "israeli", "hamas", "nato",
+    "sanction", "immigration", "border", "court", "supreme court", "diplomat",
+    "protest", "ceasefire", "airstrike", "military", "troops", "tariff",
   ],
 };
 
@@ -236,11 +246,22 @@ const KEYWORDS = Object.fromEntries(
   ])
 );
 
+// Pick the category with the most keyword hits (so one incidental keyword
+// can't outweigh several on-topic ones); ties resolve to whichever category
+// comes first in KEYWORDS. With zero hits, fall back to the source's section
+// prior, then to Politics as the general hard-news catch-all.
 function categorize(headline, section) {
+  let best = null;
+  let bestCount = 0;
   for (const [category, patterns] of Object.entries(KEYWORDS)) {
-    if (patterns.some((re) => re.test(headline))) return category;
+    let count = 0;
+    for (const re of patterns) if (re.test(headline)) count++;
+    if (count > bestCount) {
+      bestCount = count;
+      best = category;
+    }
   }
-  return SECTION_PRIOR[section] || "Politics";
+  return best || SECTION_PRIOR[section] || "Politics";
 }
 
 async function pool(items, size, worker) {

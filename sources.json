@@ -17,6 +17,7 @@
   { "name": "The Hindu", "url": "https://www.thehindu.com/sitemap/googlenews/all/all.xml", "region": "World", "section": "International" },
   { "name": "The Independent", "url": "https://www.independent.co.uk/sitemaps/googlenews", "region": "World", "section": "International" },
 
+  { "name": "CNN", "url": "https://www.cnn.com/sitemap/news.xml", "region": "U.S.", "section": "U.S." },
   { "name": "The New York Times", "url": "https://www.nytimes.com/sitemaps/new/news.xml.gz", "region": "U.S.", "section": "U.S." },
   { "name": "The Washington Post", "url": "https://www.washingtonpost.com/sitemaps/news-sitemap.xml.gz", "region": "U.S.", "section": "U.S." },
   { "name": "PBS News", "url": "https://www.pbs.org/newshour/sitemaps/news", "region": "U.S.", "section": "U.S." },
