@@ -87,7 +87,10 @@ function estimateTokens(messages) {
 /**
  * Single Groq chat call in JSON mode, with throttling and retry/backoff on
  * rate-limit (429) and transient server (5xx) responses. Returns the parsed
- * JSON object from the model's reply.
+ * JSON object from the model's reply. On a non-retryable JSON-generation
+ * failure (the small model occasionally can't finish a valid document) it
+ * returns {} so one bad chunk degrades to "no merges" instead of aborting the
+ * whole run.
  */
 async function callGroq(model, messages, { maxRetries = 5 } = {}) {
   const estimated = estimateTokens(messages);
@@ -113,6 +116,7 @@ async function callGroq(model, messages, { maxRetries = 5 } = {}) {
           model,
           messages,
           temperature: 0,
+          max_tokens: 4000,
           response_format: { type: "json_object" },
         }),
       });
@@ -136,6 +140,13 @@ async function callGroq(model, messages, { maxRetries = 5 } = {}) {
 
     if (!res.ok) {
       const body = await res.text().catch(() => "");
+      // The model sometimes can't produce a complete valid JSON document for a
+      // given chunk (json_validate_failed / hit max output tokens). That's not
+      // fatal — degrade this call to an empty result and carry on.
+      if (res.status === 400 && /json_validate_failed|completion tokens/i.test(body)) {
+        process.stdout.write("    (warn) a chunk failed JSON generation; keeping it unmerged\n");
+        return {};
+      }
       throw new Error(`Groq ${res.status}: ${body.slice(0, 300)}`);
     }
 
@@ -195,6 +206,36 @@ const LOCAL_THRESHOLD = 0.6;
 // News"), which would otherwise merge many unrelated articles into one. Require
 // at least this many significant words on both sides before merging.
 const MIN_SIG_FOR_MERGE = 3;
+
+// Looser bar used to VERIFY the small model's proposed merges (it legitimately
+// catches paraphrases the 0.6 local pass misses, but also over-groups loosely
+// related headlines). A group only stays merged if members share at least this
+// much significant-word overlap — enough to veto absurd merges without
+// discarding real paraphrases.
+const AI_VERIFY_THRESHOLD = 0.2;
+
+// Split a model-proposed group so each kept sub-group actually shares
+// significant words. Greedy: place each headline with the first sub-group whose
+// anchor it overlaps enough, else start a new one. Unrelated items the model
+// lumped together (e.g. distinct stock reports sharing only "stock") split back
+// out into their own stories.
+function verifyGroup(members, stories) {
+  if (members.length <= 1) return [members];
+  const subs = []; // { anchor: Set<string>, members: number[] }
+  for (const idx of members) {
+    const sig = signature(stories[idx].headline);
+    let placed = false;
+    for (const sub of subs) {
+      if (jaccard(sig, sub.anchor) >= AI_VERIFY_THRESHOLD) {
+        sub.members.push(idx);
+        placed = true;
+        break;
+      }
+    }
+    if (!placed) subs.push({ anchor: sig, members: [idx] });
+  }
+  return subs.map((s) => s.members);
+}
 
 // Union-find over headlines, comparing only pairs that share a significant word
 // (via an inverted index) so it stays fast for ~1000 items.
@@ -308,20 +349,25 @@ async function groupChunk(stories) {
     groups.get(label).push(i);
   }
 
+  // The small model tends to over-group loosely related headlines, so verify
+  // each proposed group locally and split any members that don't actually
+  // belong together before merging.
   const merged = [];
   for (const members of groups.values()) {
-    let repIdx = members[0];
-    for (const i of members) {
-      if (stories[i].headline.length > stories[repIdx].headline.length) repIdx = i;
+    for (const sub of verifyGroup(members, stories)) {
+      let repIdx = sub[0];
+      for (const i of sub) {
+        if (stories[i].headline.length > stories[repIdx].headline.length) repIdx = i;
+      }
+      const sources = new Set();
+      for (const i of sub) stories[i].sources.forEach((src) => sources.add(src));
+      merged.push({
+        headline: stories[repIdx].headline,
+        link: stories[repIdx].link,
+        region: stories[repIdx].region,
+        sources: [...sources],
+      });
     }
-    const sources = new Set();
-    for (const i of members) stories[i].sources.forEach((src) => sources.add(src));
-    merged.push({
-      headline: stories[repIdx].headline,
-      link: stories[repIdx].link,
-      region: stories[repIdx].region,
-      sources: [...sources],
-    });
   }
 
   return merged;
