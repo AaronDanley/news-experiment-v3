@@ -60,10 +60,11 @@ function renderPage(data) {
       s.totalSources > 1
         ? `<span class="badge multi" title="${escapeHtml(s.sources.join(", "))}">${s.totalSources} sources</span>`
         : `<span class="badge">1 source</span>`;
-    const sourceList =
-      s.totalSources > 1
-        ? `<div class="sources">${escapeHtml(s.sources.join(" · "))}</div>`
-        : `<div class="sources">${escapeHtml(s.sources[0] || "")}</div>`;
+    const primary = s.primarySource || s.sources[0] || "";
+    const others = (s.sources || []).filter((src) => src !== primary);
+    const othersLine = others.length
+      ? `<div class="sources">also: ${escapeHtml(others.join(" · "))}</div>`
+      : "";
     return `<li>
         <span class="rank">${s.rank}</span>
         <div class="story">
@@ -72,7 +73,8 @@ function renderPage(data) {
             ${badge}
           </div>
           <a href="${escapeHtml(s.link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(s.headline)}</a>
-          ${sourceList}
+          <div class="primary">${escapeHtml(primary)}</div>
+          ${othersLine}
         </div>
       </li>`;
   };
@@ -128,7 +130,8 @@ ${g.rows.map(renderStory).join("\n")}
     .tag { display: inline-block; min-width: 3rem; font-size: .7rem; font-weight: bold; color: #555; border: 1px solid #ccc; border-radius: 3px; padding: 0 .3rem; margin-right: .35rem; text-align: center; }
     .badge { font-size: .7rem; color: #777; border: 1px solid #ddd; border-radius: 10px; padding: 0 .5rem; }
     .badge.multi { color: #b30000; border-color: #f0b0b0; background: #fff5f5; font-weight: bold; cursor: help; }
-    .sources { color: #999; font-size: .75rem; margin-top: .15rem; }
+    .primary { color: #555; font-size: .8rem; font-weight: 600; margin-top: .15rem; }
+    .sources { color: #999; font-size: .75rem; margin-top: .05rem; }
   </style>
 </head>
 <body>

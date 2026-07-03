@@ -196,6 +196,9 @@ const KEYWORD_TERMS = {
     "app", "ai", "chip", "software", "iphone", "startup", "cybersecurity",
     "google", "meta", "robot", "chatbot", "smartphone", "microsoft",
     "openai", "artificial intelligence",
+    // Gaming/consumer electronics — otherwise "game" alone tags these as Sports
+    // (e.g. a PlayStation story). These give Technology the stronger signal.
+    "playstation", "xbox", "nintendo", "console", "gaming", "video game",
   ],
   "Arts & Entertainment": [
     "movie", "film", "album", "actor", "actress", "box office", "celebrity",

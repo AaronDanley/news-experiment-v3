@@ -296,6 +296,7 @@ function localCluster(headlines) {
       headline: headlines[rep].headline,
       link: headlines[rep].link,
       region: headlines[rep].region,
+      primarySource: headlines[rep].source,
       sources: [...sources],
     });
   }
@@ -365,6 +366,7 @@ async function groupChunk(stories) {
         headline: stories[repIdx].headline,
         link: stories[repIdx].link,
         region: stories[repIdx].region,
+        primarySource: stories[repIdx].primarySource,
         sources: [...sources],
       });
     }
@@ -419,6 +421,7 @@ async function dedupeCategory(name, headlines) {
     headline: s.headline,
     link: s.link,
     region: s.region,
+    primarySource: s.primarySource,
     sources: s.sources,
     category: name,
     totalSources: s.sources.length,
@@ -531,6 +534,7 @@ async function rankStories(stories) {
       category: s.category,
       region: s.region,
       totalSources: s.totalSources,
+      primarySource: s.primarySource,
       sources: s.sources,
     })),
   };
