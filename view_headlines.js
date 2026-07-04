@@ -13,6 +13,7 @@ const PORT = 3001;
 const DATA_FILE = path.join(__dirname, "data", "headlines.json");
 
 const CATEGORY_ORDER = [
+  "Breaking News",
   "Politics",
   "Business",
   "Technology",
@@ -20,6 +21,7 @@ const CATEGORY_ORDER = [
   "Sports",
   "Science",
   "Health",
+  "General",
 ];
 
 function escapeHtml(str) {

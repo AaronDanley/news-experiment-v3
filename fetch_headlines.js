@@ -221,6 +221,17 @@ const KEYWORD_TERMS = {
     "market", "stock", "earning", "inflation", "tariff", "merger", "ipo",
     "bank", "economy", "trade deal", "share", "ceo", "revenue", "investor",
   ],
+  // Crime, accidents, and natural disasters — hard-news events that aren't
+  // about governance/policy. Without this list these stories hit no keyword
+  // and used to default into Politics, turning it into a dumping ground.
+  // Evaluated before Politics so a breaking event wins a Politics tie.
+  "Breaking News": [
+    "shooting", "shooter", "gunman", "stabbing", "killed", "death", "murder",
+    "homicide", "arrest", "manhunt", "kidnapping", "hostage", "explosion",
+    "crash", "collision", "derailment", "wildfire", "earthquake", "hurricane",
+    "tornado", "flood", "flooding", "evacuation", "blaze", "rescue",
+    "disaster", "landslide", "mudslide", "tsunami", "casualties", "suspect",
+  ],
   Politics: [
     "election", "president", "senate", "congress", "minister", "parliament",
     "war", "policy", "vote", "government", "white house", "kremlin",
@@ -257,7 +268,9 @@ const KEYWORDS = Object.fromEntries(
 // Pick the category with the most keyword hits (so one incidental keyword
 // can't outweigh several on-topic ones); ties resolve to whichever category
 // comes first in KEYWORDS. With zero hits, fall back to the source's section
-// prior, then to Politics as the general hard-news catch-all.
+// prior, then to General as the uncategorized catch-all. (Breaking News is a
+// keyword-only category, NOT the fallback, so it stays genuine breaking
+// events instead of absorbing every signal-less headline.)
 function categorize(headline, section) {
   let best = null;
   let bestCount = 0;
@@ -269,7 +282,7 @@ function categorize(headline, section) {
       best = category;
     }
   }
-  return best || SECTION_PRIOR[section] || "Politics";
+  return best || SECTION_PRIOR[section] || "General";
 }
 
 async function pool(items, size, worker) {

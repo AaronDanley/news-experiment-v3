@@ -14,6 +14,7 @@ const PORT = 3002;
 const DATA_FILE = path.join(__dirname, "data", "ranked_stories.json");
 
 const CATEGORY_ORDER = [
+  "Breaking News",
   "Politics",
   "Business",
   "Technology",
@@ -21,6 +22,7 @@ const CATEGORY_ORDER = [
   "Sports",
   "Science",
   "Health",
+  "General",
 ];
 
 function slug(str) {
@@ -65,7 +67,7 @@ function renderPage(data) {
     const othersLine = others.length
       ? `<div class="sources">also: ${escapeHtml(others.join(" · "))}</div>`
       : "";
-    return `<li>
+    return `<li data-rank="${s.rank}">
         <span class="rank">${s.rank}</span>
         <div class="story">
           <div class="line">
@@ -118,6 +120,10 @@ ${g.rows.map(renderStory).join("\n")}
     nav a { font-size: .8rem; color: #333; text-decoration: none; border: 1px solid #ddd; border-radius: 14px; padding: .1rem .6rem; background: #fafafa; }
     nav a:hover { background: #eee; }
     nav .count { color: #999; }
+    .filter { display: flex; align-items: center; gap: .5rem; margin-bottom: 1.5rem; font-size: .85rem; color: #555; }
+    .filter button { font-size: .8rem; color: #333; border: 1px solid #ccc; border-radius: 14px; padding: .15rem .8rem; background: #fafafa; cursor: pointer; }
+    .filter button:hover { background: #eee; }
+    .filter button.active { background: #0645ad; border-color: #0645ad; color: #fff; }
     h2 { font-size: 1.15rem; border-bottom: 2px solid #ccc; padding-bottom: .25rem; margin-top: 2.2rem; scroll-margin-top: 1rem; }
     h2 .count { color: #999; font-weight: normal; font-size: .9rem; }
     ol, ul { list-style: none; padding-left: 0; }
@@ -137,8 +143,46 @@ ${g.rows.map(renderStory).join("\n")}
 <body>
   <h1>Ranked Stories</h1>
   <p class="meta">${data.totalStories} unique stories from ${data.totalHeadlines} headlines &middot; ${multi} covered by multiple sources &middot; ranked ${escapeHtml(when)} &middot; <a href="/">refresh</a></p>
+  <div class="filter">
+    <span>Show:</span>
+    <button type="button" data-limit="50">Top 50</button>
+    <button type="button" data-limit="0" class="active">All</button>
+  </div>
   <nav>${nav}</nav>
 ${sections}
+  <script>
+    (function () {
+      const buttons = document.querySelectorAll(".filter button");
+      const sections = document.querySelectorAll("section");
+      const navLinks = document.querySelectorAll("nav a");
+      function apply(limit) {
+        sections.forEach((sec) => {
+          let visible = 0;
+          sec.querySelectorAll("li").forEach((li) => {
+            const show = !limit || Number(li.dataset.rank) <= limit;
+            li.style.display = show ? "" : "none";
+            if (show) visible++;
+          });
+          sec.style.display = visible ? "" : "none";
+          const count = sec.querySelector("h2 .count");
+          if (count) count.textContent = "(" + visible + ")";
+          const link = [...navLinks].find((a) => a.getAttribute("href") === "#" + sec.id);
+          if (link) {
+            link.style.display = visible ? "" : "none";
+            const lc = link.querySelector(".count");
+            if (lc) lc.textContent = visible;
+          }
+        });
+      }
+      buttons.forEach((b) =>
+        b.addEventListener("click", () => {
+          buttons.forEach((x) => x.classList.remove("active"));
+          b.classList.add("active");
+          apply(Number(b.dataset.limit));
+        })
+      );
+    })();
+  </script>
 </body>
 </html>`;
 }

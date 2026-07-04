@@ -54,6 +54,7 @@ const TPM_BUDGET = 5500;
 const MAX_PER_CATEGORY = Number(process.env.MAX_PER_CATEGORY) || Infinity;
 
 const CATEGORY_ORDER = [
+  "Breaking News",
   "Politics",
   "Business",
   "Technology",
@@ -61,6 +62,7 @@ const CATEGORY_ORDER = [
   "Sports",
   "Science",
   "Health",
+  "General",
 ];
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
